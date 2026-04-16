@@ -7,8 +7,9 @@ import pandas as pd
 DATA_FILE = Path(__file__).resolve().parent.parent / "data" / "campaigns.csv"
 
 
-def analyze_campaigns() -> dict:
-    df = pd.read_csv(DATA_FILE)
+def load_and_analyze_data(csv_path: str | Path = DATA_FILE) -> dict:
+    """Load campaign data from CSV and compute campaign and global KPIs."""
+    df = pd.read_csv(csv_path)
 
     df["ctr"] = (df["clicks"] / df["impressions"]) * 100
     df["roas"] = df["revenue"] / df["spend"]
@@ -29,5 +30,10 @@ def analyze_campaigns() -> dict:
     }
 
 
+def analyze_campaigns() -> dict:
+    """Backward-compatible wrapper around the phase 3 analyzer entrypoint."""
+    return load_and_analyze_data(DATA_FILE)
+
+
 if __name__ == "__main__":
-    pprint(analyze_campaigns())
+    pprint(load_and_analyze_data())

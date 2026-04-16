@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Marketing Performance Report</title>
+    <style>
+        :root {
+            --bg: #f3f6fb;
+            --panel: #ffffff;
+            --panel-alt: #f8fbff;
+            --text: #18212f;
+            --muted: #5f6b7a;
+            --border: #dbe3ee;
+            --shadow: 0 18px 40px rgba(16, 24, 40, 0.08);
+            --primary: #145da0;
+            --primary-soft: #eaf4ff;
+            --success: #1f7a4d;
+            --success-soft: #e9f8f0;
+            --warning: #b35a00;
+            --warning-soft: #fff3e8;
+            --accent: #5c3b8a;
+            --accent-soft: #f3ebff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #eef4fb 0%, #f7f9fc 100%);
+            color: var(--text);
+        }
+
+        .container {
+            width: min(1180px, calc(100% - 48px));
+            margin: 0 auto;
+            padding: 40px 0 56px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #123b63, #145da0 58%, #3b82c4);
+            color: #ffffff;
+            border-radius: 24px;
+            padding: 36px 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .hero h1 {
+            margin: 0 0 12px;
+            font-size: 2rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.86);
+            font-size: 0.98rem;
+        }
+
+        .section {
+            margin-top: 28px;
+            background: var(--panel);
+            border: 1px solid rgba(219, 227, 238, 0.9);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 8px 24px rgba(16, 24, 40, 0.05);
+        }
+
+        .section h2 {
+            margin: 0 0 20px;
+            font-size: 1.25rem;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .kpi-card {
+            background: var(--panel-alt);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .kpi-card .label {
+            margin: 0 0 10px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .kpi-card .value {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .insight-card {
+            border-radius: 18px;
+            padding: 22px;
+            border: 1px solid transparent;
+        }
+
+        .insight-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.1rem;
+        }
+
+        .insight-card p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .insight-type {
+            margin: 0 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .victoire {
+            background: var(--success-soft);
+            border-color: #bfe5d0;
+        }
+
+        .victoire .insight-type {
+            color: var(--success);
+        }
+
+        .alerte {
+            background: var(--warning-soft);
+            border-color: #f2cfab;
+        }
+
+        .alerte .insight-type {
+            color: var(--warning);
+        }
+
+        .recommandation {
+            background: var(--accent-soft);
+            border-color: #dccdf7;
+        }
+
+        .recommandation .insight-type {
+            color: var(--accent);
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 760px;
+        }
+
+        thead th {
+            background: #f4f7fb;
+            color: var(--muted);
+            text-align: left;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        th, td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tbody tr:hover {
+            background: #f9fbfd;
+        }
+
+        tbody td {
+            font-size: 0.96rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--muted);
+            padding: 28px;
+        }
+
+        @media (max-width: 960px) {
+            .kpi-grid,
+            .insights-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                width: min(100% - 24px, 1180px);
+                padding-top: 24px;
+            }
+
+            .hero,
+            .section {
+                padding: 22px;
+            }
+
+            .kpi-grid,
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <section class="hero">
+            <h1>Weekly Marketing Performance Report</h1>
+            <p>Generated on 2026-04-16 09:39:04</p>
+        </section>
+
+        <section class="section">
+            <h2>KPI Summary</h2>
+            <div class="kpi-grid">
+                <article class="kpi-card">
+                    <p class="label">Total Spend</p>
+                    <p class="value">$12,840.00</p>
+                </article>
+                <article class="kpi-card">
+                    <p class="label">Total Impressions</p>
+                    <p class="value">284,000</p>
+                </article>
+                <article class="kpi-card">
+                    <p class="label">Global CTR</p>
+                    <p class="value">3.34%</p>
+                </article>
+                <article class="kpi-card">
+                    <p class="label">Global ROAS</p>
+                    <p class="value">4.42x</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Insights</h2>
+            <div class="insights-grid">
+                
+        <article class="insight-card victoire">
+            <p class="insight-type">Victoire</p>
+            <h3>Retargeting Panier — levier à scaler immédiatement</h3>
+            <p>La campagne &#x27;Retargeting Panier&#x27; est la meilleure opportunité : spend 4 200€, ROAS 6,2 (le plus élevé), CTR 5,8% et 210 conversions (revenu 26 040€). Amplifier cette campagne générera du revenu rentable à court terme. Proposition d&#x27;amplification immédiate : +1 200€ de budget (passer à 5 400€, +28,6%) financé par la réduction du budget froid. À ROAS constant (6,2) cela représenterait ~7 440€ de revenu additionnel attendu.</p>
+        </article>
+        
+
+        <article class="insight-card alerte">
+            <p class="insight-type">Alerte</p>
+            <h3>Prospection Froid — sous-performance critique</h3>
+            <p>La campagne &#x27;Prospection Froid&#x27; est le problème le plus urgent : spend 2 900€, ROAS 1,9 (en dessous du minimum acceptable 2,5), CTR 1,4% (objectif 3,5%) et seulement 38 conversions. Elle dilue le rendement global malgré un budget significatif. Risque immédiat : poursuite du gaspillage de 2 900€/semaine si non corrigé.</p>
+        </article>
+        
+
+        <article class="insight-card recommandation">
+            <p class="insight-type">Recommandation</p>
+            <h3>Réallouer budget et tester creatives/audiences la semaine prochaine</h3>
+            <p>Action concrète pour la semaine prochaine : 1) Réduire la dépense &#x27;Prospection Froid&#x27; de 70% (de 2 900€ à 870€) pour stopper la fuite de budget. 2) Réallouer les 2 030€ libérés : +1 200€ vers &#x27;Retargeting Panier&#x27; (4200→5400€) et +830€ vers &#x27;Promo Saisonnière&#x27; (2640→3470€). 3) Sur la campagne froide, conserver 870€ pour tester 3 nouvelles créatives et 2 segments d&#x27;audience différents (A/B sur 1 semaine). 4) Suivi quotidien : si ROAS de la prospection reste &lt;2,5 après 3 jours de test, mettre en pause et redistribuer le budget aux campagnes performantes. Mesure attendue : amélioration du ROAS global et hausse de revenus immédiats via le retargeting.</p>
+        </article>
+        
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Campaign Performance</h2>
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campaign</th>
+                            <th>Spend</th>
+                            <th>Impressions</th>
+                            <th>Clicks</th>
+                            <th>Conversions</th>
+                            <th>Revenue</th>
+                            <th>CTR</th>
+                            <th>ROAS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+        <tr>
+            <td>Retargeting Panier</td>
+            <td>$4,200.00</td>
+            <td>65,000</td>
+            <td>3,770</td>
+            <td>210</td>
+            <td>$26,040.00</td>
+            <td>5.80%</td>
+            <td>6.20x</td>
+        </tr>
+        
+
+        <tr>
+            <td>Notoriété Marque</td>
+            <td>$3,100.00</td>
+            <td>100,000</td>
+            <td>3,100</td>
+            <td>95</td>
+            <td>$11,780.00</td>
+            <td>3.10%</td>
+            <td>3.80x</td>
+        </tr>
+        
+
+        <tr>
+            <td>Prospection Froid</td>
+            <td>$2,900.00</td>
+            <td>85,000</td>
+            <td>1,190</td>
+            <td>38</td>
+            <td>$5,510.00</td>
+            <td>1.40%</td>
+            <td>1.90x</td>
+        </tr>
+        
+
+        <tr>
+            <td>Promo Saisonnière</td>
+            <td>$2,640.00</td>
+            <td>34,000</td>
+            <td>1,428</td>
+            <td>120</td>
+            <td>$13,464.00</td>
+            <td>4.20%</td>
+            <td>5.10x</td>
+        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
