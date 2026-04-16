@@ -13,10 +13,12 @@ from apscheduler.triggers.cron import CronTrigger
 
 try:
     from app.analyzer import load_and_analyze_data
+    from app.delivery import deliver_report
     from app.insights import generate_insights
     from app.report import generate_html_report, save_report
 except ImportError:
     from analyzer import load_and_analyze_data
+    from delivery import deliver_report
     from insights import generate_insights
     from report import generate_html_report, save_report
 
@@ -71,8 +73,10 @@ def run_weekly_pipeline() -> str:
 
     html = generate_html_report(analysis, insights)
     output_path = save_report(html)
+    delivery_results = deliver_report(analysis, insights, output_path)
 
     LOGGER.info("Weekly pipeline job completed. Report saved to %s", output_path)
+    LOGGER.info("Weekly pipeline delivery results: %s", delivery_results)
     return output_path
 
 
