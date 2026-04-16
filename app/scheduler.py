@@ -26,7 +26,7 @@ except ImportError:
 DEFAULT_CSV_PATH = Path(__file__).resolve().parent.parent / "data" / "campaigns.csv"
 DEFAULT_TIMEZONE = ZoneInfo("America/Vancouver")
 RUN_ON_START = True
-TEST_MODE = False
+TEST_MODE = True
 
 
 logging.basicConfig(
